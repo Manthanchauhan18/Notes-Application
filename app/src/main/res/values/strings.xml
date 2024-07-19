@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NotesDemo</string>
+    <string name="search_by_the_keyboard">Search by the keyboard...</string>
+    <string name="my_notes">My Notes</string>
+</resources>

@@ -1,0 +1,226 @@
+[
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_add_text.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/add_text.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_searchview_backgorund.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/searchview_backgorund.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_delete.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/delete.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_save.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/save.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/layout_cardview_recyclerview_notes.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/layout/cardview_recyclerview_notes.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_image_icon.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/image_icon.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/layout_discard_changes_dialog.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/layout/discard_changes_dialog.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/layout_activity_notes_home.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/layout/activity_notes_home.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_add_image.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/add_image.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.example.notesdemo.app-pngs-34:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_ic_baseline_add_24.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/ic_baseline_add_24.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/font_nunito_semibold.ttf.flat",
+        "source": "com.example.notesdemo.app-main-41:/font/nunito_semibold.ttf"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_search.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/search.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_back.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/back.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/font_nunito_regular.ttf.flat",
+        "source": "com.example.notesdemo.app-main-41:/font/nunito_regular.ttf"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable-v24_left_arrow.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable-v24/left_arrow.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable-v24_color_change.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable-v24/color_change.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable-v24_arrow.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable-v24/arrow.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/layout_save_changes_dialog.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/layout/save_changes_dialog.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-xxhdpi_notes_icon.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/mipmap-xxhdpi/notes_icon.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_notes_icon.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/notes_icon.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_ic_baseline_delete_forever_24.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/ic_baseline_delete_forever_24.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_info.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/info.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_income_temp.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/income_temp.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/raw_empty_notes.json.flat",
+        "source": "com.example.notesdemo.app-main-41:/raw/empty_notes.json"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_close.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/close.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/font_roboto_regular.ttf.flat",
+        "source": "com.example.notesdemo.app-main-41:/font/roboto_regular.ttf"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_line.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/line.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_add.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/add.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_normal_button_background.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/normal_button_background.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_search_btn.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/search_btn.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_cancel.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/cancel.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/xml_backup_rules.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/layout_activity_add_note_page.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/layout/activity_add_note_page.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_info_btn.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/info_btn.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_button_background.xml.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/button_background.xml"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.example.notesdemo.app-debug-40:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.notesdemo.app-merged_res-39:/drawable_edit.png.flat",
+        "source": "com.example.notesdemo.app-main-41:/drawable/edit.png"
+    }
+]

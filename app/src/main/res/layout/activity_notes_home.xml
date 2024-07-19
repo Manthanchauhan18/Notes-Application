@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/const_note_home_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.NotesHome"
+        android:background="#252525">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/floatingbutton_add_notes_home"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="30dp"
+            app:cardBackgroundColor="@color/black"
+            android:elevation="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_add_24"
+                app:tint="@color/white"
+                android:padding="15dp"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/const_toolbar_without_searchview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/textview_mynotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_notes"
+                    android:textSize="35sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="30dp"/>
+
+                <ImageView
+                    android:id="@+id/img_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:src="@drawable/info_btn"
+                    app:layout_constraintTop_toTopOf="@id/textview_mynotes"
+                    app:layout_constraintBottom_toBottomOf="@id/textview_mynotes"
+                    android:layout_marginEnd="20dp"/>
+
+                <ImageView
+                    android:id="@+id/img_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/search_btn"
+                    app:layout_constraintEnd_toStartOf="@id/img_info"
+                    app:layout_constraintTop_toTopOf="@id/textview_mynotes"
+                    app:layout_constraintBottom_toBottomOf="@id/textview_mynotes"
+                    android:layout_marginEnd="20dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/const_searchview"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/searchview_backgorund"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/img_search_glass"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/search"
+                    android:layout_marginStart="15dp"/>
+
+                <ImageView
+                    android:id="@+id/img_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    app:layout_constraintStart_toEndOf="@id/img_search_glass"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/line"
+                    android:layout_marginStart="10dp"/>
+
+                <EditText
+                    android:id="@+id/edit_searchview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/img_line"
+                    app:layout_constraintEnd_toStartOf="@id/img_close"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@null"
+                    android:hint="@string/search_by_the_keyboard"
+                    android:textColorHint="@color/white"
+                    android:layout_marginHorizontal="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+
+                <ImageView
+                    android:id="@+id/img_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/close"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="15dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/empty_lottie_animation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/empty_notes"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/const_toolbar"/>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeToRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/const_toolbar"
+            app:layout_constraintVertical_bias="0.0"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <com.faltenreich.skeletonlayout.SkeletonLayout
+                android:id="@+id/skeletonLayout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:shimmerDurationInMillis="1000"
+                app:shimmerColor="#A1A1A1"
+                app:maskColor="#CFCFCF"
+                app:maskCornerRadius="5dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_notes_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/cardview_recyclerview_notes"/>
+
+            </com.faltenreich.skeletonlayout.SkeletonLayout>
+
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
