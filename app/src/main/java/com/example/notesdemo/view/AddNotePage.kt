@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -23,6 +24,7 @@ import com.example.notesdemo.helper.SqliteHelper
 import com.example.notesdemo.model.NotesModel
 import com.example.notesdemo.utils.DeleteNotification
 import com.example.notesdemo.view.viewmodel.AddNoteViewModel
+import com.example.notesdemo.view.viewmodel.UpdateNoteViewModel
 import com.google.gson.JsonObject
 import org.w3c.dom.Text
 
@@ -42,7 +44,10 @@ class AddNotePage : AppCompatActivity(), View.OnClickListener {
     var color: Int = -1
 
     val addNoteViewModel = AddNoteViewModel()
+    val updateNoteViewModel = UpdateNoteViewModel()
     val TAG = "AddNotePage"
+
+    lateinit var androidId: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +59,9 @@ class AddNotePage : AppCompatActivity(), View.OnClickListener {
 
     private fun init(){
         binding.apply {
+
+            androidId = getAndroidId(this@AddNotePage)
+            Log.e("AndroidID", "Android ID: $androidId")
 
             imageEdit.visibility = View.GONE
             imageSave.visibility = View.VISIBLE
@@ -157,9 +165,20 @@ class AddNotePage : AppCompatActivity(), View.OnClickListener {
 //                                val updated_imageUrl = imageUri.toString()
 //                                val updated_color = color.toString()
 
-                                val updateNote = NotesModel(note_id!!,updated_title, updated_content)
-                                db.updateNotes(updateNote)
-                                showNotification(this@AddNotePage,0 , updated_title , updated_content)
+                                // update the value in database
+//                                val updateNote = NotesModel(note_id!!,updated_title, updated_content)
+//                                db.updateNotes(updateNote)
+
+                                // update the value in api
+                                val jsonObject = JsonObject()
+                                jsonObject.addProperty("note_title" , txtTitle.text.toString())
+                                jsonObject.addProperty("note_message" , txtNote.text.toString())
+                                Log.e(TAG, "init: note_id: ${androidId} , ${note_id} , ${jsonObject}", )
+                                updateNoteViewModel.updateNote(androidId, note_id, jsonObject).observe(this@AddNotePage){
+                                    Log.e(TAG, "init: $it", )
+                                }
+
+//                                showNotification(this@AddNotePage,0 , updated_title , updated_content)
 
 
                                 val intent_note_home = Intent(this@AddNotePage, NotesHome::class.java)
@@ -203,15 +222,15 @@ class AddNotePage : AppCompatActivity(), View.OnClickListener {
 
 
 //                        adding into local database
-                        db.addNote(title, content)
+//                        db.addNote(title, content)
 
                         //adding into api
-//                        val jsonObject = JsonObject()
-//                        jsonObject.addProperty("note_title" , txtTitle.text.toString())
-//                        jsonObject.addProperty("note_message" , txtNote.text.toString())
-//                        addNoteViewModel.setNotes(jsonObject).observe(this@AddNotePage){
-//                            Log.e(TAG, "init: $it", )
-//                        }
+                        val jsonObject = JsonObject()
+                        jsonObject.addProperty("note_title" , txtTitle.text.toString())
+                        jsonObject.addProperty("note_message" , txtNote.text.toString())
+                        addNoteViewModel.setNotes(androidId, jsonObject).observe(this@AddNotePage){
+                            Log.e(TAG, "init: $it", )
+                        }
 
 
                         Toast.makeText(this@AddNotePage, title + " added to database", Toast.LENGTH_LONG).show()
@@ -219,7 +238,7 @@ class AddNotePage : AppCompatActivity(), View.OnClickListener {
                         txtNote.text.clear()
                         txtTitle.text.clear()
 
-                        showNotification(this@AddNotePage,1 , title , content)
+//                        showNotification(this@AddNotePage,1 , title , content)
 
                         val intent_note_home = Intent(this@AddNotePage, NotesHome::class.java)
                         startActivity(intent_note_home)
@@ -236,6 +255,10 @@ class AddNotePage : AppCompatActivity(), View.OnClickListener {
             }
 
         }
+    }
+
+    fun getAndroidId(context: Context): String {
+        return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
     }
 
     private fun setOnClickListener() {
@@ -276,42 +299,42 @@ class AddNotePage : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun showNotification(context: Context,digit: Int , title: String  , content: String) {
-        val channel_id = "my_note"
-        val notificaton_id = 1
-        var text = ""
-
-        val dismissIntent = Intent(context, DeleteNotification::class.java)
-        dismissIntent.action = "ACTION_DISMISS"
-
-        val dismissPendingIntent = PendingIntent.getActivity(applicationContext, 1, dismissIntent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT // setting the mutability flag
-        )
-
-        val notificationBuilder = NotificationCompat.Builder(context , channel_id)
-            .setSmallIcon(R.mipmap.notes_icon)
-            .setContentTitle("${if (digit == 1) "New Note Added" else "Note Updated"}")
-            .setContentText(title)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .addAction(R.drawable.ic_launcher_background, "Cancel", dismissPendingIntent)
-            .setAutoCancel(true)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "My Expanse"
-            val descriptionText = "Channel Description"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(channel_id, name, importance).apply {
-                description = descriptionText
-            }
-
-            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-
-        val notificationManagerCompat = NotificationManagerCompat.from(context)
-        notificationManagerCompat.notify(notificaton_id, notificationBuilder.build())
-
-    }
+//    private fun showNotification(context: Context,digit: Int , title: String  , content: String) {
+//        val channel_id = "my_note"
+//        val notificaton_id = 1
+//        var text = ""
+//
+//        val dismissIntent = Intent(context, DeleteNotification::class.java)
+//        dismissIntent.action = "ACTION_DISMISS"
+//
+//        val dismissPendingIntent = PendingIntent.getActivity(applicationContext, 1, dismissIntent,
+//            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT // setting the mutability flag
+//        )
+//
+//        val notificationBuilder = NotificationCompat.Builder(context , channel_id)
+//            .setSmallIcon(R.mipmap.notes_icon)
+//            .setContentTitle("${if (digit == 1) "New Note Added" else "Note Updated"}")
+//            .setContentText(title)
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//            .addAction(R.drawable.ic_launcher_background, "Cancel", dismissPendingIntent)
+//            .setAutoCancel(true)
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val name = "My Expanse"
+//            val descriptionText = "Channel Description"
+//            val importance = NotificationManager.IMPORTANCE_DEFAULT
+//            val channel = NotificationChannel(channel_id, name, importance).apply {
+//                description = descriptionText
+//            }
+//
+//            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//            notificationManager.createNotificationChannel(channel)
+//        }
+//
+//        val notificationManagerCompat = NotificationManagerCompat.from(context)
+//        notificationManagerCompat.notify(notificaton_id, notificationBuilder.build())
+//
+//    }
 
 
     override fun onBackPressed() {
