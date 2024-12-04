@@ -10,7 +10,6 @@ import com.example.notesdemo.model.NotesModel
 
 class SqliteHelper(context: Context) : SQLiteOpenHelper(context , DATABASE_NAME , null , DATABASE_VERSION) {
 
-
     companion object {
         const val DATABASE_NAME = "NOTES_DEMO"
 
@@ -85,7 +84,6 @@ class SqliteHelper(context: Context) : SQLiteOpenHelper(context , DATABASE_NAME 
         // moving cursor to first position.
         if (cursorCourses.moveToFirst()) {
             do {
-
                 courseModalArrayList.add(
                     NotesModel(
                         cursorCourses.getString(0),

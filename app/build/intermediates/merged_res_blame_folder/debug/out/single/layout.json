@@ -1,14 +1,18 @@
 [
     {
+        "merged": "C:\\Users\\manth\\.gradle\\daemon\\7.4\\com.example.notesdemo.app-mergeDebugResources-38:\\layout\\activity_notes_home.xml",
+        "source": "C:\\Users\\manth\\.gradle\\daemon\\7.4\\com.example.notesdemo.app-main-41:\\layout\\activity_notes_home.xml"
+    },
+    {
         "merged": "com.example.notesdemo.app-mergeDebugResources-38:/layout/activity_notes_home.xml",
         "source": "com.example.notesdemo.app-main-41:/layout/activity_notes_home.xml"
     },
     {
-        "merged": "com.example.notesdemo.app-mergeDebugResources-38:/layout/cardview_recyclerview_notes.xml",
-        "source": "com.example.notesdemo.app-main-41:/layout/cardview_recyclerview_notes.xml"
+        "merged": "C:\\Users\\manth\\.gradle\\daemon\\7.4\\com.example.notesdemo.app-mergeDebugResources-38:\\layout\\activity_add_note_page.xml",
+        "source": "C:\\Users\\manth\\.gradle\\daemon\\7.4\\com.example.notesdemo.app-main-41:\\layout\\activity_add_note_page.xml"
     },
     {
-        "merged": "com.example.notesdemo.app-mergeDebugResources-38:/layout/activity_add_note_page.xml",
-        "source": "com.example.notesdemo.app-main-41:/layout/activity_add_note_page.xml"
+        "merged": "C:\\Users\\manth\\.gradle\\daemon\\7.4\\com.example.notesdemo.app-mergeDebugResources-38:\\layout\\cardview_recyclerview_notes.xml",
+        "source": "C:\\Users\\manth\\.gradle\\daemon\\7.4\\com.example.notesdemo.app-main-41:\\layout\\cardview_recyclerview_notes.xml"
     }
 ]

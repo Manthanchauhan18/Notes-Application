@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -21,29 +22,31 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.notesdemo.R
 import com.example.notesdemo.databinding.ActivityNotesHomeBinding
 import com.example.notesdemo.helper.SqliteHelper
+import com.example.notesdemo.model.NotesApi
+import com.example.notesdemo.model.NotesBody
 import com.example.notesdemo.model.NotesModel
-import com.example.notesdemo.model.notes.Note
-import com.example.notesdemo.model.notes.NoteItem
 import com.example.notesdemo.utils.SwipeGesture
 import com.example.notesdemo.view.adapter.NoteListAdapter
+import com.example.notesdemo.view.viewmodel.DeleteNoteViewModel
 import com.example.notesdemo.view.viewmodel.NoteViewmodel
 import com.faltenreich.skeletonlayout.Skeleton
-import com.google.gson.JsonObject
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.collections.ArrayList
 
 class NotesHome : AppCompatActivity() , NoteListAdapter.OnItemClickListener , View.OnClickListener {
 
     private lateinit var binding: ActivityNotesHomeBinding
     private lateinit var skeleton: Skeleton
-    private lateinit var noteList: ArrayList<NotesModel>
+    private lateinit var noteList: ArrayList<NotesBody>
     private lateinit var noteListAdapter: NoteListAdapter
+    private lateinit var deleteNoteViewModel: DeleteNoteViewModel
     private lateinit var noteListHelper: SqliteHelper
     var doubleBackToExitPressedOnce = false
     val noteViewModel = NoteViewmodel()
     val TAG = "NotesHome"
+
+    lateinit var androidId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +62,11 @@ class NotesHome : AppCompatActivity() , NoteListAdapter.OnItemClickListener , Vi
 
         binding.apply {
 
+            androidId = getAndroidId(this@NotesHome)
+            Log.e("AndroidID", "Android ID: $androidId")
+
             noteListAdapter = NoteListAdapter(this@NotesHome , this@NotesHome)
+            deleteNoteViewModel = DeleteNoteViewModel()
 
             skeleton = skeletonLayout
             skeleton.showSkeleton()
@@ -78,7 +85,8 @@ class NotesHome : AppCompatActivity() , NoteListAdapter.OnItemClickListener , Vi
 
                 @SuppressLint("RestrictedApi")
                 override fun onTextChanged(searchText: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    filter(searchText.toString())
+                    Log.e(TAG, "onTextChanged: ${searchText}", )
+//                    filter(searchText.toString())
                 }
 
                 override fun afterTextChanged(p0: Editable?) {}
@@ -87,6 +95,10 @@ class NotesHome : AppCompatActivity() , NoteListAdapter.OnItemClickListener , Vi
 
         }
 
+    }
+
+    fun getAndroidId(context: Context): String {
+        return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
     }
 
     private fun setOnClickListener() {
@@ -135,57 +147,59 @@ class NotesHome : AppCompatActivity() , NoteListAdapter.OnItemClickListener , Vi
 
             //using local database
 
-            noteListHelper = SqliteHelper(this@NotesHome)
-            noteList = noteListHelper.readNotes() // Read data from the database
-
-            if (noteList.isEmpty()) {
-                emptyLottieAnimation.visibility = View.VISIBLE
-                recyclerviewNotesHome.visibility = View.GONE
-            } else {
-                emptyLottieAnimation.visibility = View.GONE
-                recyclerviewNotesHome.visibility = View.VISIBLE
-
-                if(noteList.size == 1){
-                    noteListAdapter.setList(noteList)
-                    recyclerviewNotesHome.adapter = noteListAdapter
-                }else{
-                    val reverseList = noteList.reversed()
-                    noteListAdapter.setList(reverseList as ArrayList<NotesModel>)
-                    recyclerviewNotesHome.adapter = noteListAdapter
-                }
-
-                Handler(Looper.getMainLooper()).postDelayed({
-                    onDataLoaded()
-                }, 1500)
-
-            }
-
-
-            //using api
-//            noteViewModel.getNotes().observe(this@NotesHome){
-//                Log.e(TAG, "loadData: $it", )
-//                noteList.addAll(it)
-//                if (noteList.isEmpty()) {
-//                    emptyLottieAnimation.visibility = View.VISIBLE
-//                    recyclerviewNotesHome.visibility = View.GONE
-//                } else {
-//                    emptyLottieAnimation.visibility = View.GONE
-//                    recyclerviewNotesHome.visibility = View.VISIBLE
+//            noteListHelper = SqliteHelper(this@NotesHome)
+//            noteList = noteListHelper.readNotes() // Read data from the database
 //
-//                    if (noteList.size == 1) {
-//                        noteListAdapter.setList(noteList)
-//                        recyclerviewNotesHome.adapter = noteListAdapter
-//                    } else {
-//                        val reverseList = noteList.reversed()
-//                        noteListAdapter.setList(reverseList as ArrayList<NoteItem>)
-//                        recyclerviewNotesHome.adapter = noteListAdapter
-//                    }
+//            if (noteList.isEmpty()) {
+//                emptyLottieAnimation.visibility = View.VISIBLE
+//                recyclerviewNotesHome.visibility = View.GONE
+//            } else {
+//                emptyLottieAnimation.visibility = View.GONE
+//                recyclerviewNotesHome.visibility = View.VISIBLE
 //
-//                    Handler(Looper.getMainLooper()).postDelayed({
-//                        onDataLoaded()
-//                    }, 1500)
+//                if(noteList.size == 1){
+//                    noteListAdapter.setList(noteList)
+//                    recyclerviewNotesHome.adapter = noteListAdapter
+//                }else{
+//                    val reverseList = noteList.reversed()
+//                    noteListAdapter.setList(reverseList as ArrayList<NotesModel>)
+//                    recyclerviewNotesHome.adapter = noteListAdapter
 //                }
+//
+//                Handler(Looper.getMainLooper()).postDelayed({
+//                    onDataLoaded()
+//                }, 1500)
+//
 //            }
+
+
+//            using api
+            noteViewModel.getNotes(androidId).observe(this@NotesHome){
+                Log.e(TAG, "loadData: $it AND ${it.notesBody}", )
+                noteList.clear()
+                noteList.addAll(it.notesBody)
+                if (noteList.isEmpty()) {
+                    skeleton.showOriginal()
+                    emptyLottieAnimation.visibility = View.VISIBLE
+                    recyclerviewNotesHome.visibility = View.GONE
+                } else {
+                    emptyLottieAnimation.visibility = View.GONE
+                    recyclerviewNotesHome.visibility = View.VISIBLE
+
+                    if (noteList.size == 1) {
+                        noteListAdapter.setList(noteList)
+                        recyclerviewNotesHome.adapter = noteListAdapter
+                    } else {
+                        val reverseList = noteList.reversed()
+                        noteListAdapter.setList(reverseList as ArrayList<NotesBody>)
+                        recyclerviewNotesHome.adapter = noteListAdapter
+                    }
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        onDataLoaded()
+                    }, 1500)
+                }
+            }
 
         }
 
@@ -193,10 +207,10 @@ class NotesHome : AppCompatActivity() , NoteListAdapter.OnItemClickListener , Vi
     }
 
     private fun filter(text: String) {
-        val filteredlist: ArrayList<NotesModel> = ArrayList()
+        val filteredlist: ArrayList<NotesBody> = ArrayList()
 
         for (item in noteList) {
-            if (item.Note_title.toLowerCase().contains(text.toLowerCase()) || item.Note_content.toLowerCase().contains(text.toLowerCase())) {
+            if (item.note_title.toLowerCase().contains(text.toLowerCase()) || item.note_message.toLowerCase().contains(text.toLowerCase())) {
                 filteredlist.add(item)
             }
         }
@@ -241,85 +255,89 @@ class NotesHome : AppCompatActivity() , NoteListAdapter.OnItemClickListener , Vi
         dragAndDropHelper.attachToRecyclerView(binding.recyclerviewNotesHome)
     }
 
-//    private fun swipe() {
-//        val swipeGesture = object : SwipeGesture(this@NotesHome){
-//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-//                when(direction){
-//                    ItemTouchHelper.LEFT -> {
-//                        val position = viewHolder.adapterPosition
-//                        AlertDialog.Builder(this@NotesHome)
-//                            .setTitle("Delete")
-//                            .setIcon(R.drawable.notes_icon)
-//                            .setMessage("Are you sure you want to Delete?")
-//                            .setCancelable(false)
-//                            .setPositiveButton("Yes") { dialog, whichButton ->
+    private fun swipe() {
+        val swipeGesture = object : SwipeGesture(this@NotesHome){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                when(direction){
+                    ItemTouchHelper.LEFT -> {
+                        val position = viewHolder.adapterPosition
+                        AlertDialog.Builder(this@NotesHome)
+                            .setTitle("Delete")
+                            .setIcon(R.drawable.notes_icon)
+                            .setMessage("Are you sure you want to Delete?")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes") { dialog, whichButton ->
+
+                                val title = noteList[(noteList.size-1) - viewHolder.adapterPosition]
+
+                                val deletedCourse: NotesBody = noteList[(noteList.size-1) - viewHolder.adapterPosition]
+
+                                Log.e("TAG", "onSwiped:---> ${viewHolder.adapterPosition} , ${deletedCourse.note_title} " )
+
+                                noteList.removeAt(viewHolder.adapterPosition)
+                                noteListAdapter.removeItem(viewHolder.adapterPosition)
+//                                noteListAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+
+                                deleteNoteViewModel.deleteNote(androidId, deletedCourse._id ).observe(this@NotesHome){
+                                    Log.e(TAG, "onSwiped: ${it}", )
+                                    Log.e(TAG, "onSwiped: ${deletedCourse._id} was deleted", )
+                                }
+
+
+                                if(noteList.isEmpty()){
+                                    binding.emptyLottieAnimation.visibility = View.VISIBLE
+                                    binding.recyclerviewNotesHome.visibility = View.GONE
+                                }
+
+//                            // below line is to display our snackbar with action.
+//                            Snackbar.make(binding.recyclerviewNotesHome, "Deleted ", Snackbar.LENGTH_LONG)
+//                                .setAction(
+//                                "Undo",
+//                                View.OnClickListener {
+//                                    // adding on click listener to our action of snack bar.
+//                                    // below line is to add our item to array list with a position.
+//                                    noteList.add(position, deletedCourse)
 //
-//                                val title = noteList[(noteList.size-1) - viewHolder.adapterPosition]
+//                                    GlobalScope.launch {
+//                                        noteListHelper.addNote(deletedCourse.Note_title , deletedCourse.Note_content)
+//                                    }
+//                                    // below line is to notify item is
 //
-//                                val deletedCourse: NotesModel = noteList[(noteList.size-1) - viewHolder.adapterPosition]
-//
-//                                Log.e("TAG", "onSwiped:---> ${viewHolder.adapterPosition} , ${deletedCourse.Note_title} " )
-//
-//                                noteList.removeAt(viewHolder.adapterPosition)
-//                                noteListAdapter.removeItem(viewHolder.adapterPosition)
-////                                noteListAdapter.notifyItemRemoved(viewHolder.adapterPosition)
-//
-//                                GlobalScope.launch { noteListHelper.deleteCourse(deletedCourse.Note_id) }
-//
-//                                if(noteList.isEmpty()){
-//                                    binding.emptyLottieAnimation.visibility = View.VISIBLE
-//                                    binding.recyclerviewNotesHome.visibility = View.GONE
-//                                }
-//
-////                            // below line is to display our snackbar with action.
-////                            Snackbar.make(binding.recyclerviewNotesHome, "Deleted ", Snackbar.LENGTH_LONG)
-////                                .setAction(
-////                                "Undo",
-////                                View.OnClickListener {
-////                                    // adding on click listener to our action of snack bar.
-////                                    // below line is to add our item to array list with a position.
-////                                    noteList.add(position, deletedCourse)
-////
-////                                    GlobalScope.launch {
-////                                        noteListHelper.addNote(deletedCourse.Note_title , deletedCourse.Note_content)
-////                                    }
-////                                    // below line is to notify item is
-////
-////                                    noteListAdapter.undoItem(noteList)
-////                                }).show()
-//                            }
-//                            .setNegativeButton("No") { dialog, whichButton ->
-//                                dialog.dismiss()
-//                                noteListAdapter.notifyItemChanged(position)
-//                            }
-//                            .show()
-//                    }
-//
-//
-//                }
-//            }
-//
-//        }
-//
-//        val touchHelper = ItemTouchHelper(swipeGesture)
-//        touchHelper.attachToRecyclerView(binding.recyclerviewNotesHome)
-//
-//    }
+//                                    noteListAdapter.undoItem(noteList)
+//                                }).show()
+                            }
+                            .setNegativeButton("No") { dialog, whichButton ->
+                                dialog.dismiss()
+                                noteListAdapter.notifyItemChanged(position)
+                            }
+                            .show()
+                    }
+
+
+                }
+            }
+
+        }
+
+        val touchHelper = ItemTouchHelper(swipeGesture)
+        touchHelper.attachToRecyclerView(binding.recyclerviewNotesHome)
+
+    }
 
 
     private fun onDataLoaded() {
         skeleton.showOriginal()
-//        swipe()
-        drag()
+        swipe()
+//        drag()
     }
 
-    override fun onItemClick(note: NotesModel) {
+    override fun onItemClick(note: NotesBody) {
         // Here, you can open the ResultActivity and pass the selected note's data
         val intent = Intent(this@NotesHome, AddNotePage::class.java)
         intent.putExtra("from_item", true)
-        intent.putExtra("note_id", note.Note_id)
-        intent.putExtra("note_title", note.Note_title)
-        intent.putExtra("note_content", note.Note_content)
+        intent.putExtra("note_id", note._id)
+        intent.putExtra("note_title", note.note_title)
+        intent.putExtra("note_content", note.note_message)
 //        intent.putExtra("note_image", note.Note_image)
 //        intent.putExtra("note_color", note.Note_color)
         // Add more data as needed...

@@ -4,7 +4,7 @@
             "outputFile": "com.example.notesdemo.app-mergeDebugResources-37:/values-w320dp-land-v13/values-w320dp-land-v13.xml",
             "map": [
                 {
-                    "source": "D:\\College\\AndroidStudioProjects\\java jdk\\caches\\transforms-3\\6b597f3594f60fd93017936955f39822\\transformed\\material-1.11.0-alpha01\\res\\values-w320dp-land-v13\\values-w320dp-land-v13.xml",
+                    "source": "C:\\Users\\manth\\.gradle\\caches\\transforms-3\\6b597f3594f60fd93017936955f39822\\transformed\\material-1.11.0-alpha01\\res\\values-w320dp-land-v13\\values-w320dp-land-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

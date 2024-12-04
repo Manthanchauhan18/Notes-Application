@@ -8,13 +8,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesdemo.R
 import com.example.notesdemo.databinding.CardviewRecyclerviewNotesBinding
-import com.example.notesdemo.model.NotesModel
-import com.example.notesdemo.model.notes.Note
-import com.example.notesdemo.model.notes.NoteItem
+import com.example.notesdemo.model.NotesBody
 
 class NoteListAdapter(private val context: Context , private val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<NoteListAdapter.ViewHolder>() {
 
-    private var noteList: ArrayList<NotesModel> = ArrayList()
+    private var noteList: ArrayList<NotesBody> = ArrayList()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var binding: CardviewRecyclerviewNotesBinding? = null
@@ -31,7 +29,7 @@ class NoteListAdapter(private val context: Context , private val itemClickListen
     }
 
     interface OnItemClickListener {
-        fun onItemClick(note: NotesModel)
+        fun onItemClick(note: NotesBody)
 
     }
 
@@ -64,7 +62,7 @@ class NoteListAdapter(private val context: Context , private val itemClickListen
                 )
 
 
-                binding!!.cardviewTextTitle.setText(this.Note_title + ": " + this.Note_content)
+                binding!!.cardviewTextTitle.setText(this.note_title + ": " + this.note_message)
 //                binding!!.cardviewRecyclerview.setCardBackgroundColor(this.Note_color.toInt())
 
 //                if(!this.Note_content.equals("") || !this.Note_image.equals("null")){
@@ -106,7 +104,7 @@ class NoteListAdapter(private val context: Context , private val itemClickListen
         return noteList.size
     }
 
-    fun setList(list: ArrayList<NotesModel>){
+    fun setList(list: ArrayList<NotesBody>){
         if(noteList.isNotEmpty()){
             noteList.clear()
         }
